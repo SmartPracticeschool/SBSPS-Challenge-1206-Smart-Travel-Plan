@@ -1,0 +1,286 @@
+{
+  "intents": [
+    {
+      "intent": "book_tickets",
+      "examples": [
+        {
+          "text": "i need to book tickets"
+        },
+        {
+          "text": "how do i book my tickets"
+        },
+        {
+          "text": "booking tickets"
+        },
+        {
+          "text": "how to book tickets in advance"
+        },
+        {
+          "text": "how do i reserve a seat"
+        }
+      ],
+      "description": "How to book a ticket"
+    },
+    {
+      "intent": "Hello",
+      "examples": [
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hey"
+        },
+        {
+          "text": "greetings"
+        },
+        {
+          "text": "hi"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "arrival_time",
+      "examples": [
+        {
+          "text": "nearest time of arrival of the bus"
+        },
+        {
+          "text": "when will the bus reach the destination"
+        },
+        {
+          "text": "when will the bus arrive"
+        },
+        {
+          "text": "when will the bus reach"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "location",
+      "examples": [
+        {
+          "text": "where is the bus"
+        },
+        {
+          "text": "where is my bus currently at"
+        },
+        {
+          "text": "what is the location of the bus"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Vacancies",
+      "examples": [
+        {
+          "text": "Are they any vacancies in the bus"
+        },
+        {
+          "text": "is there a seat empty for travel"
+        }
+      ],
+      "description": "know the number of vacancies"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "thank_you",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "thanks",
+          "synonyms": [
+            "thank you",
+            "thanks",
+            "appreciate",
+            "thanx"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get that quite right. Could you repeat?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_10_1594809038647",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello, This is Alex. How can I help u?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#Hello",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_7_1594722869616",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You're Welcome.\nIs there something else that I can help u with ?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "@thank_you",
+      "dialog_node": "node_2_1594723104554",
+      "previous_sibling": "node_10_1594722530401"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You can check for the vacancies in Public Transportation Details, under the Home tab."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Vacancies",
+      "dialog_node": "node_8_1594722976269",
+      "previous_sibling": "node_7_1594722869616"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Check the availability of seats in Public Transportation Details under the Home page.\nPress on click to book a seat option if there is a vacancy.\nFill in your details in details tab and click on submit.\nYou will be informed of the details soon."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#book_tickets",
+      "dialog_node": "node_10_1594722530401",
+      "previous_sibling": "node_8_1594722976269"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Go to Home tab and press Click to Know the Location button to view details "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#location",
+      "dialog_node": "node_10_1594809038647",
+      "previous_sibling": "node_2_1594723104554"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. This is Alex. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "skill",
+  "language": "en",
+  "description": ""
+}
